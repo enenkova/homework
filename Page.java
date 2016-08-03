@@ -4,14 +4,7 @@ public class Page {
 
 	private String title;
 	private String text;
-
-	public Page(String title) {
-		if (title != null && !title.trim().equals("")) {
-			this.title = title;
-		} else {
-			System.out.println("Enter valid title");
-		}
-	}
+	private int pageNumber;
 
 	void addText(String text) {
 		if (this.text != null && !text.trim().equals("")) {
@@ -29,9 +22,8 @@ public class Page {
 		return this.title + "\n" + this.text;
 	}
 
-	boolean searchWord(String word) {
-		word = word == null ? "" : word;
-		return (this.getText().contains(word));
+	boolean searchWord(String word) {		
+			return (this.getText().contains(word));
 	}
 
 	boolean containsDigits() {
@@ -58,6 +50,20 @@ public class Page {
 
 	String getTitle() {
 		return title;
+	}
+
+	public int getPageNumber() {
+		return pageNumber;
+	}
+
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+
+	void setTitle(String title) {
+		if (title != null && !title.trim().equals("")) {
+			this.title = title;
+		}
 	}
 
 }

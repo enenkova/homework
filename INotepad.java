@@ -2,7 +2,7 @@ package notepad;
 
 interface INotepad {
 
-	void addTextOnPage(Page page, String text);
+	void addTextOnPage(String title, String text);
 
 	void replaceText(int pageNumber, String text);
 

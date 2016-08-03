@@ -1,53 +1,58 @@
 package notepad;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class SimpleNotepad implements INotepad {
 
-	static final int MAX_PAGES = 10;
-	private Page[] pages;
-	private int pageNumber;
+	private List<Page> pages;
 
 	public SimpleNotepad() {
-		this.pages = new Page[10];
-		this.setPageNumber(1);
+		pages = new ArrayList<Page>();
+
 	}
 
 	@Override
-	public void addTextOnPage(Page page, String text) {
-		if (pageNumber <= MAX_PAGES) {
-			if (text != null && !text.trim().equals("")) {
-				if (pages[pageNumber - 1] == null) {
-					pages[pageNumber - 1] = new Page(page.getTitle());
-					pages[pageNumber - 1].addText(text);
-					pageNumber++;
-
-				}
-			}
-		} else {
-			System.out.println("Max pages riched");
+	public void addTextOnPage(String title, String text) {
+		Page page = new Page();
+		if (text != null && !text.trim().equals("")) {
+			page.addText(text);
 		}
-	}
-
-	@Override
-	public void replaceText(int pageNumber, String text) {
-		if (pages[pageNumber - 1] != null) {
-			if (text != null && !text.trim().equals("")) {
-				pages[pageNumber - 1].deleteText();
-				pages[pageNumber - 1].addText(text);
-			}
-		} else {
-			System.out.println("No such a page in notebook");
+		if (title != null && title.trim().length() > 0) {
+			page.setTitle(title);
 		}
+		page.setPageNumber(this.pages.size() + 1);
+		pages.add(page);
 
 	}
 
 	@Override
 	public void deleteText(int pageNumber) {
-		if (pages[pageNumber - 1] != null) {
-			pages[pageNumber - 1].deleteText();
-		} else {
-			System.out.println("No such a page in notebook");
+		if (pageNumber > 0) {
+			for (Page page : pages) {
+				if (page.getPageNumber() == pageNumber) {
+					page.deleteText();
+					break;
+				}
+			}
 		}
+	}
 
+	@Override
+	public void replaceText(int pageNumber, String text) {
+		if (pageNumber > 0) {
+			for (Page page : pages) {
+				if (page.getPageNumber() == pageNumber) {
+					page.deleteText();
+					if (text != null && text.trim().length() > 0) {
+						page.addText(text);
+						break;
+					}
+				}
+			}
+		} else {
+			System.out.println("The page is not negative number");
+		}
 	}
 
 	@Override
@@ -82,15 +87,4 @@ class SimpleNotepad implements INotepad {
 		}
 	}
 
-	public int getPageNumber() {
-		return pageNumber;
-	}
-
-	public void setPageNumber(int pageNumber) {
-		if (pageNumber > 0 && pageNumber <= MAX_PAGES) {
-			this.pageNumber = pageNumber;
-		} else {
-			System.out.println("Page number is not in range of array");
-		}
-	}
 }

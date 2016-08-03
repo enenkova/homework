@@ -2,33 +2,32 @@ package notepad;
 
 public class DemoSecureNotepad {
 
-	public static void main(String[] args) {
-		INotepad mySecNote = new SecureNotepad("aBc");
-		Page a = new Page("A");
-		Page b = new Page("B");
-		Page c = new Page("C");
-		Page d = new Page("D");
-		Page e = new Page("E");
-		Page f = new Page("F");
-		Page j = new Page("J");
-		Page h = new Page("K");
-		Page i = new Page("I");
-		Page l = new Page("J");
-		Page k = new Page("K");
+	public static void main(String[] args)  {
+		INotepad mySecNote;
 
-		mySecNote.addTextOnPage(a, "Azbuka");
-		mySecNote.addTextOnPage(b, "Bazuka");
-		mySecNote.addTextOnPage(c, "Bazuka");
-		mySecNote.addTextOnPage(d, "Bazuka");
-		mySecNote.addTextOnPage(e, "Bazuka");
-		mySecNote.addTextOnPage(f, "Bazuka");
-		mySecNote.addTextOnPage(j, "Bazuka");
-		mySecNote.addTextOnPage(h, "Bazuka");
-		mySecNote.addTextOnPage(i, "Bazuka");
-		mySecNote.addTextOnPage(l, "Bazuka");
-		mySecNote.addTextOnPage(k, "Bazuka");
-		mySecNote.previewAllPages();
-		mySecNote.searchWord("uka");
+		try {
+			mySecNote = new SecureNotepad("aBcdef5@R");
+			mySecNote.addTextOnPage("A", "Answer");
+			mySecNote.addTextOnPage("B", "Border");
+			mySecNote.addTextOnPage("C", "Car");
+			mySecNote.addTextOnPage("D", "Demo");
+			mySecNote.addTextOnPage("E", "Elephant");
+			mySecNote.addTextOnPage("F", "File");
+			mySecNote.addTextOnPage("G", "Joomla");
+			mySecNote.addTextOnPage("H", "Hard");
+			mySecNote.addTextOnPage("I", "Ice");
+			mySecNote.addTextOnPage("K", "Label");
+			mySecNote.addTextOnPage("L", "Koala");
+			mySecNote.replaceText(4, "Doctor");
+			mySecNote.previewAllPages();
+			mySecNote.searchWord("er");
+		} catch (WrongPasswordException e1) {
+			
+			e1.printStackTrace();
+		}
+	
+
+		
 	}
 
 }

@@ -2,13 +2,21 @@ package notepad;
 
 import java.util.Scanner;
 
+
 public class SecureNotepad extends SimpleNotepad implements INotepad {
 
 	private String password;
 
-	public SecureNotepad(String password) {
+	public SecureNotepad(String password) throws WrongPasswordException {
 		super();
-		this.password = password;
+		String patern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+		if (password.matches(patern)) {
+			this.password = password;
+		} else {
+			throw new WrongPasswordException("The password length is 9 symbols and must contains" +
+					" lower, upper case, special symbol and digits");
+		}
+		
 	}
 
 	boolean checkPassword() {
@@ -26,9 +34,9 @@ public class SecureNotepad extends SimpleNotepad implements INotepad {
 	}
 
 	@Override
-	public void addTextOnPage(Page page, String text) {
+	public void addTextOnPage(String title, String text) {
 		if (checkPassword()) {
-			super.addTextOnPage(page, text);
+			super.addTextOnPage(title, text);
 		}
 	}
 

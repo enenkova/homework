@@ -3,7 +3,7 @@ package notepad;
 class ElectronicSecureNotepad extends SecureNotepad implements IElectronicDevice {
 	private boolean isDeviceTurnOn;
 
-	public ElectronicSecureNotepad(String password) {
+	public ElectronicSecureNotepad(String password) throws WrongPasswordException {
 		super(password);
 		this.isDeviceTurnOn = false;
 	}
@@ -26,9 +26,9 @@ class ElectronicSecureNotepad extends SecureNotepad implements IElectronicDevice
 	}
 
 	@Override
-	public void addTextOnPage(Page page, String text) {
+	public void addTextOnPage(String title, String text) {
 		if (isStarted()) {
-			super.addTextOnPage(page, text);
+			super.addTextOnPage(title, text);
 		}
 	}
 
